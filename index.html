@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>index.html</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary: #a78bfa;
+            --primary-light: #c4b5fd;
+            --primary-dark: #7c3aed;
+            --secondary: #8b5cf6;
+            --accent: #818cf8;
+            --text: #f5f5f5;
+            --text-light: #a0a0a0;
+            --bg: #0a0a0a;
+            --bg-soft: #0f0f0f;
+            --bg-card: #141414;
+            --bg-card-hover: #1a1a1a;
+            --border: rgba(139,92,246,0.12);
+            --border-hover: rgba(139,92,246,0.25);
+            --shadow: 0 1px 3px rgba(0,0,0,0.5), 0 1px 2px rgba(0,0,0,0.3);
+            --shadow-lg: 0 10px 40px -10px rgba(139,92,246,0.15), 0 4px 12px rgba(0,0,0,0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.7;
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10,10,10,0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: clamp(1rem, 2.5vw, 2rem);
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 500;
+            font-size: clamp(0.8rem, 1.8vw, 0.9rem);
+            transition: color 0.2s;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0a0a0a 0%, #0d0812 50%, #0a0a0a 100%);
+            position: relative;
+            overflow: hidden;
+            padding: 5rem 1rem 2rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -15%;
+            width: min(600px, 80vw);
+            height: min(600px, 80vw);
+            background: radial-gradient(circle, rgba(139,92,246,0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            left: -10%;
+            width: min(500px, 70vw);
+            height: min(500px, 70vw);
+            background: radial-gradient(circle, rgba(124,58,237,0.05) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            text-align: center;
+            padding: clamp(1rem, 3vw, 2rem);
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(139,92,246,0.08);
+            border: 1px solid rgba(139,92,246,0.2);
+            color: var(--primary);
+            padding: 0.5rem 1.25rem;
+            border-radius: 100px;
+            font-size: clamp(0.75rem, 1.8vw, 0.85rem);
+            font-weight: 500;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(4px);
+            white-space: nowrap;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            padding: 0 0.5rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: clamp(0.75rem, 2vw, 0.875rem) clamp(1.25rem, 3vw, 1.75rem);
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: clamp(0.85rem, 2vw, 0.95rem);
+            border: none;
+            cursor: pointer;
+            min-width: 140px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: 0 4px 20px rgba(139,92,246,0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(139,92,246,0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 1.5px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Section Styles */
+        section {
+            padding: clamp(3rem, 8vw, 6rem) clamp(1rem, 4vw, 2rem);
+            max-width: 1100px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: clamp(2rem, 5vw, 4rem);
+        }
+
+        .section-tag {
+            display: inline-block;
+            background: rgba(139,92,246,0.1);
+            color: var(--primary);
+            padding: 0.35rem 1rem;
+            border-radius: 100px;
+            font-size: clamp(0.7rem, 1.5vw, 0.8rem);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .section-header h2 {
+            font-size: clamp(1.5rem, 4vw, 2.25rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--text-light);
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 0.5rem;
+        }
+
+        /* Project Overview */
+        .overview {
+            background: var(--bg-soft);
+        }
+
+        .overview-card {
+            background: var(--bg-card);
+            border-radius: 24px;
+            padding: clamp(1.5rem, 4vw, 3rem);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
+        }
+
+        .project-meta {
+            display: flex;
+            gap: clamp(1rem, 2.5vw, 2rem);
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-light);
+            font-size: clamp(0.8rem, 1.8vw, 0.9rem);
+        }
+
+        .meta-item i {
+            color: var(--primary);
+        }
+
+        .overview h3 {
+            font-size: clamp(1.3rem, 3vw, 1.75rem);
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .overview p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            font-size: clamp(0.95rem, 2vw, 1.05rem);
+        }
+
+        .slogan {
+            background: linear-gradient(135deg, rgba(139,92,246,0.08), rgba(124,58,237,0.05));
+            border-left: 4px solid var(--primary);
+            padding: 1.25rem 1.5rem;
+            border-radius: 0 12px 12px 0;
+            font-style: italic;
+            color: var(--primary-light);
+            font-weight: 500;
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+        }
+
+        /* Background Section */
+        .background-grid {
+            display: grid;
+            gap: clamp(1.25rem, 3vw, 2rem);
+        }
+
+        .problem-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: clamp(1.5rem, 3.5vw, 2.5rem);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--border-hover);
+        }
+
+        .problem-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .problem-icon {
+            width: clamp(40px, 8vw, 48px);
+            height: clamp(40px, 8vw, 48px);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .icon-1 { background: linear-gradient(135deg, #a78bfa, #c4b5fd); }
+        .icon-2 { background: linear-gradient(135deg, #8b5cf6, #a78bfa); }
+        .icon-3 { background: linear-gradient(135deg, #7c3aed, #8b5cf6); }
+        .icon-4 { background: linear-gradient(135deg, #6d28d9, #7c3aed); }
+
+        .problem-header h3 {
+            font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+            font-weight: 600;
+        }
+
+        .problem-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+            font-size: clamp(0.88rem, 1.9vw, 1rem);
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(139,92,246,0.06), rgba(124,58,237,0.03));
+            border: 1px solid rgba(139,92,246,0.15);
+            border-radius: 16px;
+            padding: clamp(1.25rem, 3vw, 2rem);
+            margin-top: 3rem;
+        }
+
+        .highlight-box h4 {
+            color: var(--primary-light);
+            font-size: clamp(1rem, 2.2vw, 1.1rem);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .highlight-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .highlight-box li {
+            padding: 0.5rem 0;
+            color: #c0c0c0;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            font-size: clamp(0.85rem, 1.8vw, 0.95rem);
+        }
+
+        .highlight-box li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--primary);
+            border-radius: 50%;
+            margin-top: 0.6em;
+            flex-shrink: 0;
+        }
+
+        /* Features Section */
+        .features {
+            background: var(--bg-soft);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+            gap: clamp(1rem, 2.5vw, 2rem);
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: clamp(1.5rem, 3.5vw, 2.5rem);
+            text-align: center;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--border-hover);
+        }
+
+        .feature-icon {
+            width: clamp(52px, 10vw, 64px);
+            height: clamp(52px, 10vw, 64px);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(1.25rem, 2.8vw, 1.5rem);
+            color: white;
+            margin: 0 auto 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: clamp(1rem, 2.3vw, 1.15rem);
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            font-size: clamp(0.85rem, 1.8vw, 0.95rem);
+            line-height: 1.7;
+        }
+
+        /* Flowchart Section */
+        .flowchart {
+            text-align: center;
+        }
+
+        .flowchart-img-wrapper {
+            margin-top: 2rem;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-lg);
+            background: var(--bg-card);
+            cursor: zoom-in;
+            position: relative;
+            transition: border-color 0.3s ease;
+        }
+
+        .flowchart-img-wrapper:hover {
+            border-color: var(--border-hover);
+        }
+
+        .flowchart-hint {
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            background: rgba(10,10,10,0.75);
+            backdrop-filter: blur(8px);
+            color: var(--primary-light);
+            padding: 0.4rem 0.9rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .flowchart-img-wrapper:hover .flowchart-hint {
+            opacity: 1;
+        }
+
+        .flowchart-img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lightbox-topbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            padding: 0 1.5rem;
+            z-index: 10001;
+            background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, transparent 100%);
+        }
+
+        .lightbox-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: white;
+            padding: 0.5rem 1.25rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .lightbox-back:hover {
+            background: rgba(139,92,246,0.2);
+            border-color: rgba(139,92,246,0.4);
+        }
+
+        .lightbox-back i {
+            font-size: 0.85rem;
+        }
+
+        .lightbox-zoom-info {
+            position: fixed;
+            top: 1.1rem;
+            right: 1.5rem;
+            color: rgba(255,255,255,0.45);
+            font-size: 0.8rem;
+            font-weight: 500;
+            z-index: 10001;
+            font-variant-numeric: tabular-nums;
+            background: rgba(0,0,0,0.4);
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
+        }
+
+        .lightbox-canvas {
+            position: absolute;
+            inset: 56px 0 0 0;
+            overflow: hidden;
+            cursor: grab;
+            user-select: none;
+            -webkit-user-select: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-canvas.dragging {
+            cursor: grabbing;
+        }
+
+        .lightbox-img-container {
+            transform-origin: center center;
+            will-change: transform;
+            flex-shrink: 0;
+        }
+
+        .lightbox-img-container img {
+            display: block;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            pointer-events: none;
+            -webkit-user-drag: none;
+            max-width: none;
+            max-height: none;
+        }
+
+        .lightbox-hint {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.3);
+            font-size: 0.78rem;
+            white-space: nowrap;
+            z-index: 10001;
+            pointer-events: none;
+            background: rgba(0,0,0,0.4);
+            padding: 0.35rem 1rem;
+            border-radius: 8px;
+            transition: opacity 0.6s ease;
+        }
+
+        /* Links Section */
+        .links {
+            background: linear-gradient(135deg, #0f0f0f 0%, #100a18 100%);
+            border: 1px solid var(--border);
+            border-radius: 32px;
+            margin: clamp(2rem, 5vw, 4rem) auto;
+            max-width: 1000px;
+            padding: clamp(2.5rem, 6vw, 4rem) clamp(1.5rem, 4vw, 3rem);
+        }
+
+        .links .section-header h2,
+        .links .section-header p {
+            color: var(--text);
+        }
+
+        .links .section-tag {
+            background: rgba(139,92,246,0.1);
+            color: var(--primary);
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+            gap: clamp(1rem, 2.5vw, 1.5rem);
+            margin-top: 3rem;
+        }
+
+        .link-card {
+            background: rgba(139,92,246,0.05);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: clamp(1.5rem, 3vw, 2rem);
+            text-align: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--text);
+            display: block;
+        }
+
+        .link-card:hover {
+            background: rgba(139,92,246,0.1);
+            transform: translateY(-4px);
+            border-color: var(--border-hover);
+            box-shadow: 0 8px 30px rgba(139,92,246,0.1);
+        }
+
+        .link-card i {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .link-card h3 {
+            font-size: clamp(1rem, 2.2vw, 1.1rem);
+            margin-bottom: 0.5rem;
+        }
+
+        .link-card p {
+            font-size: clamp(0.8rem, 1.6vw, 0.85rem);
+            color: var(--text-light);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: clamp(2rem, 5vw, 3rem) clamp(1rem, 3vw, 2rem);
+            color: var(--text-light);
+            font-size: clamp(0.8rem, 1.8vw, 0.9rem);
+            border-top: 1px solid var(--border);
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* =========================
+           RESPONSIVE BREAKPOINTS
+           ========================= */
+
+        /* Tablet and below */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .nav-inner {
+                justify-content: center;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: min(280px, 80vw);
+            }
+
+            .links-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Small phones */
+        @media (max-width: 480px) {
+            html {
+                font-size: 15px;
+            }
+
+            .hero {
+                padding-top: 4.5rem;
+            }
+
+            .problem-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.75rem;
+            }
+
+            .overview-card {
+                border-radius: 16px;
+            }
+
+            .links {
+                border-radius: 20px;
+            }
+        }
+
+        /* Very small phones */
+        @media (max-width: 360px) {
+            html {
+                font-size: 14px;
+            }
+
+            .hero-badge {
+                padding: 0.4rem 1rem;
+            }
+        }
+
+        /* Large screens */
+        @media (min-width: 1400px) {
+            section {
+                max-width: 1200px;
+            }
+        }
+
+        /* Ultra-wide screens */
+        @media (min-width: 1920px) {
+            section {
+                max-width: 1300px;
+            }
+
+            html {
+                font-size: 18px;
+            }
+        }
+
+        /* Landscape orientation on mobile */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .hero {
+                min-height: auto;
+                padding: 5rem 1rem 3rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Touch device optimizations */
+        @media (hover: none) {
+            .problem-card:hover,
+            .feature-card:hover,
+            .link-card:hover {
+                transform: none;
+            }
+
+            .btn:hover {
+                transform: none;
+            }
+
+            .flowchart-hint {
+                opacity: 1;
+            }
+        }
+
+        /* Reduced motion preference */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            animation: fadeInUp 0.8s ease forwards;
+            opacity: 0;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <div class="logo">产品经理作品集</div>
+            <ul class="nav-links">
+                <li><a href="#overview">项目概览</a></li>
+                <li><a href="#background">需求背景</a></li>
+                <li><a href="#features">产品功能</a></li>
+                <li><a href="#flowchart">交互流程</a></li>
+                <li><a href="#links">相关链接</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge animate">
+                <i class="fas fa-sparkles"></i>
+                产品经理求职作品集
+            </div>
+            <h1 class="animate delay-1">让知识真正属于自己</h1>
+            <p class="animate delay-2">基于费曼学习法，打造"语音/文字输出 + AI追问 + 科学复习"的知识内化闭环</p>
+            <div class="hero-actions animate delay-3">
+                <a href="#overview" class="btn btn-primary">
+                    <i class="fas fa-rocket"></i>
+                    查看项目
+                </a>
+                <a href="https://salt-silly.github.io/" target="_blank" class="btn btn-secondary">
+                    <i class="fas fa-external-link-alt"></i>
+                    访问产品
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Overview -->
+    <section id="overview" class="overview">
+        <div class="section-header">
+            <span class="section-tag">项目概览</span>
+            <h2>说记 — 知识内化工具</h2>
+            <p>以费曼学习法为核心，解决"收藏即学习、学完即忘"的普遍困境</p>
+        </div>
+        <div class="overview-card">
+            <div class="project-meta">
+                <div class="meta-item">
+                    <i class="fas fa-user"></i>
+                    <span>独立产品经理 & 开发者</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-calendar"></i>
+                    <span>2026年5月</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-tag"></i>
+                    <span>AI + 教育工具</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-code"></i>
+                    <span>前端开发</span>
+                </div>
+            </div>
+            <h3>产品定位</h3>
+            <p>
+                说记是一款聚焦知识内化的网页版应用，区别于传统知识库工具，主打"语音/文字输出 + AI辅助 + 科学复习"，
+                推动用户主动输出知识，实现从"被动接收"到"主动内化"的转变。通过AI追问和艾宾浩斯复习算法，
+                帮助用户将收藏的知识真正转化为自身能力。
+            </p>
+            <div class="slogan">
+                "用你的话说出来，才是你的知识"
+            </div>
+        </div>
+    </section>
+
+    <!-- Background Section -->
+    <section id="background">
+        <div class="section-header">
+            <span class="section-tag">需求背景</span>
+            <h2>为什么需要说记？</h2>
+            <p>从用户痛点出发，结合学术研究，验证产品价值</p>
+        </div>
+        <div class="background-grid">
+            <div class="problem-card">
+                <div class="problem-header">
+                    <div class="problem-icon icon-1">
+                        <i class="fas fa-archive"></i>
+                    </div>
+                    <h3>收藏即学习的错觉</h3>
+                </div>
+                <p>
+                    艾宾浩斯遗忘曲线表明，学习1天后遗忘率高达66.3%，1周后仅保留约25%。
+                    然而用户却乐观评估自身学习效果——得到App付费课程平均完成率不足35%，
+                    却有超过90%的知识付费用户自觉有收获。这种"收藏家谬误"让用户误将获取信息等同于真正掌握。
+                </p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-header">
+                    <div class="problem-icon icon-2">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h3>主动输出是关键</h3>
+                </div>
+                <p>
+                    学习金字塔理论表明，被动阅读的2周留存率在30%以下，而教授他人可达90%。
+                    Roediger & Karpicke（2006）的实验证明，重复练习的后续留存率显著高于重复阅读。
+                    知识内化的关键不是"存进去"，而是"说出来"——这正是费曼学习法"以教代学"的核心理念。
+                </p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-header">
+                    <div class="problem-icon icon-3">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>AI时代更需要内化</h3>
+                </div>
+                <p>
+                    MIT Media Lab（2025）研究发现，使用LLM辅助论文写作的学生脑连接强度最弱、记忆检索能力最低，
+                    且停用AI四个月后仍表现欠佳。AI放大的是判断力差距——没有内化知识，
+                    甚至不知道该向AI提出什么问题。内化知识是有效使用AI的前提，而非可被替代的环节。
+                </p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-header">
+                    <div class="problem-icon icon-4">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>市场窗口已打开</h3>
+                </div>
+                <p>
+                    2025年全球知识管理市场规模为7812.7亿美元，预计到2035年将飙升至41238.1亿美元。
+                    中国AI+教育市场2025年规模超700亿元。然而当前市场主流工具多为被动储存，
+                    仍缺乏一款以"主动输出+AI追问+科学复习"为核心闭环的知识内化产品。
+                </p>
+            </div>
+        </div>
+        <div class="highlight-box">
+            <h4><i class="fas fa-lightbulb"></i> 核心洞察</h4>
+            <ul>
+                <li>AI解决的是"找到信息"的问题，说记解决的是"让信息变成你的能力"的问题</li>
+                <li>内化知识是创造性工作的基础，也是有效使用AI的前提</li>
+                <li>当前市场缺乏以"主动输出"为核心的知识管理工具，存在明确的市场空白</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="section-header">
+            <span class="section-tag">产品功能</span>
+            <h2>核心功能模块</h2>
+            <p>围绕"输出倒逼内化"的核心价值，构建完整的学习闭环</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon icon-1">
+                    <i class="fas fa-microphone"></i>
+                </div>
+                <h3>语音/文字输出</h3>
+                <p>支持用户通过语音或文字，用自己的话复述所学知识，启动主动输出过程，将被动输入转化为主动表达。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon icon-2">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3>AI智能追问</h3>
+                <p>基于用户输出内容，AI自动提出深度追问，帮助用户发现知识盲区，完善理解框架，实现真正的内化。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon icon-3">
+                    <i class="fas fa-sync-alt"></i>
+                </div>
+                <h3>科学复习调度</h3>
+                <p>基于艾宾浩斯遗忘曲线算法，自动安排最佳复习时间点，让记忆巩固事半功倍，避免遗忘曲线陷阱。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon icon-4">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>掌握度追踪</h3>
+                <p>采用0.5星制的精细掌握度调整，让用户清晰了解每个知识点的内化程度，聚焦薄弱环节。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon icon-1">
+                    <i class="fas fa-tags"></i>
+                </div>
+                <h3>动态标签系统</h3>
+                <p>支持灵活的标签管理，让用户按主题、领域自定义知识分类，建立个性化的知识体系结构。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon icon-2">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <h3>多账号管理</h3>
+                <p>基于LocalStorage实现多账号本地数据管理，保障用户数据隐私的同时支持多人使用场景。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Flowchart Section -->
+    <section id="flowchart" class="flowchart">
+        <div class="section-header">
+            <span class="section-tag">交互设计</span>
+            <h2>页面交互流程图</h2>
+            <p>从用户进入到完成知识内化的完整交互路径</p>
+        </div>
+        <div class="flowchart-img-wrapper" id="flowchartWrapper" onclick="openLightbox()">
+            <img src="image.png" alt="说记页面交互流程图" class="flowchart-img" loading="lazy">
+            <div class="flowchart-hint">
+                <i class="fas fa-search-plus"></i> 点击放大查看
+            </div>
+        </div>
+    </section>
+
+    <!-- Links Section -->
+    <section id="links" class="links">
+        <div class="section-header">
+            <span class="section-tag">深入了解</span>
+            <h2>相关链接与文档</h2>
+            <p>查看完整的产品需求文档和在线产品体验</p>
+        </div>
+        <div class="links-grid">
+            <a href="产品需求文档-说记.pdf" target="_blank" class="link-card">
+                <i class="fas fa-file-pdf"></i>
+                <h3>PRD文档</h3>
+                <p>查看完整的产品需求文档，了解详细的功能定义和设计思路</p>
+            </a>
+            <a href="https://modao.cc/proto/bVGKvTngtf0o7tPTXWC4x/sharing?view_mode=device&screen=rbpVJZvctCUvLtOPZ&canvasId=rcVK2ncnVK3ZVeTLZAL4vJ" target="_blank" class="link-card">
+                <i class="fas fa-object-group"></i>
+                <h3>交互原型</h3>
+                <p>查看可交互原型图，体验完整的产品交互流程与界面设计</p>
+            </a>
+            <a href="https://salt-silly.github.io/" target="_blank" class="link-card">
+                <i class="fas fa-globe"></i>
+                <h3>产品网页</h3>
+                <p>访问在线产品，体验"说记"的完整功能和学习流程</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>用 <i class="fas fa-heart" style="color: var(--primary);"></i> 打造 | 基于费曼学习法的知识内化工具</p>
+    </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-topbar">
+            <button class="lightbox-back" id="lightboxBack">
+                <i class="fas fa-arrow-left"></i>
+                返回作品集
+            </button>
+        </div>
+        <div class="lightbox-zoom-info" id="zoomInfo">100%</div>
+        <div class="lightbox-canvas" id="lightboxCanvas">
+            <div class="lightbox-img-container" id="lightboxImgContainer">
+                <img src="image.png" alt="说记页面交互流程图" id="lightboxImg">
+            </div>
+        </div>
+        <div class="lightbox-hint" id="lightboxHint">滚轮缩放 · 拖拽平移 · +/- 键缩放 · ESC 返回</div>
+    </div>
+
+    <script>
+        // ---- Lightbox with zoom & pan ----
+        const lightbox = document.getElementById('lightbox');
+        const canvas = document.getElementById('lightboxCanvas');
+        const imgContainer = document.getElementById('lightboxImgContainer');
+        const img = document.getElementById('lightboxImg');
+        const zoomInfo = document.getElementById('zoomInfo');
+        const lightboxHint = document.getElementById('lightboxHint');
+        const backBtn = document.getElementById('lightboxBack');
+
+        let scale = 1;           // current display scale (1 = fit screen)
+        let panX = 0, panY = 0;
+        let dragging = false;
+        let dragStartX = 0, dragStartY = 0;
+        let dragStartPanX = 0, dragStartPanY = 0;
+
+        const MAX_SCALE = 5;
+
+        function fitImageToScreen() {
+            const cw = canvas.clientWidth;
+            const ch = canvas.clientHeight;
+            const iw = img.naturalWidth;
+            const ih = img.naturalHeight;
+            if (!iw || !ih || !cw || !ch) return;
+            // Calculate the scale so the image fills the canvas
+            scale = Math.min(cw / iw, ch / ih);
+            // Set img to its natural pixel size
+            img.style.width = iw + 'px';
+            img.style.height = ih + 'px';
+            panX = 0;
+            panY = 0;
+            applyTransform();
+            zoomInfo.textContent = '100%';
+        }
+
+        function applyTransform() {
+            imgContainer.style.transform =
+                `translate(${panX}px, ${panY}px) scale(${scale})`;
+            zoomInfo.textContent = Math.round(scale / getBaseScale() * 100) + '%';
+        }
+
+        let baseScale = 1;
+        function getBaseScale() { return baseScale; }
+
+        function openLightbox() {
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            // Ensure image is loaded, then fit
+            const doFit = () => {
+                const cw = canvas.clientWidth;
+                const ch = canvas.clientHeight;
+                const iw = img.naturalWidth;
+                const ih = img.naturalHeight;
+                if (!iw || !ih || !cw || !ch) {
+                    requestAnimationFrame(doFit);
+                    return;
+                }
+                img.style.width = iw + 'px';
+                img.style.height = ih + 'px';
+                baseScale = Math.min(cw / iw, ch / ih);
+                scale = baseScale;
+                panX = 0;
+                panY = 0;
+                applyTransform();
+                zoomInfo.textContent = '100%';
+                lightboxHint.style.opacity = '1';
+                setTimeout(() => { lightboxHint.style.opacity = '0'; }, 3500);
+            };
+            // Small delay to let lightbox become visible & layout settle
+            requestAnimationFrame(() => requestAnimationFrame(doFit));
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        backBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            closeLightbox();
+        });
+
+        // ---- Zoom via wheel ----
+        canvas.addEventListener('wheel', function(e) {
+            e.preventDefault();
+            const factor = e.deltaY > 0 ? 0.9 : 1.1;
+            scale = Math.min(baseScale * MAX_SCALE, Math.max(baseScale * 0.5, scale * factor));
+            if (scale <= baseScale * 1.01) {
+                scale = baseScale;
+                panX = 0; panY = 0;
+            }
+            applyTransform();
+        }, { passive: false });
+
+        // ---- Zoom via keyboard ----
+        document.addEventListener('keydown', function(e) {
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') { closeLightbox(); return; }
+            if (e.key === '=' || e.key === '+' || (e.key === '=' && e.shiftKey)) {
+                scale = Math.min(baseScale * MAX_SCALE, scale * 1.25);
+                applyTransform();
+            } else if (e.key === '-' || e.key === '_') {
+                const next = scale * 0.8;
+                if (next <= baseScale * 1.01) {
+                    scale = baseScale; panX = 0; panY = 0;
+                } else {
+                    scale = next;
+                }
+                applyTransform();
+            } else if (e.key === '0') {
+                scale = baseScale; panX = 0; panY = 0;
+                applyTransform();
+            }
+        });
+
+        // ---- Double click: toggle 2x ----
+        canvas.addEventListener('dblclick', function(e) {
+            e.preventDefault();
+            if (Math.abs(scale - baseScale) < 0.001) {
+                scale = baseScale * 2;
+            } else {
+                scale = baseScale;
+                panX = 0; panY = 0;
+            }
+            applyTransform();
+        });
+
+        // ---- Drag to pan ----
+        canvas.addEventListener('mousedown', function(e) {
+            e.preventDefault();
+            dragging = true;
+            dragStartX = e.clientX;
+            dragStartY = e.clientY;
+            dragStartPanX = panX;
+            dragStartPanY = panY;
+            canvas.classList.add('dragging');
+        });
+
+        document.addEventListener('mousemove', function(e) {
+            if (!dragging) return;
+            panX = dragStartPanX + (e.clientX - dragStartX);
+            panY = dragStartPanY + (e.clientY - dragStartY);
+            applyTransform();
+        });
+
+        document.addEventListener('mouseup', function() {
+            if (dragging) {
+                dragging = false;
+                canvas.classList.remove('dragging');
+            }
+        });
+
+        // ---- Touch support ----
+        let lastPinchDist = 0;
+        let pinchStartScale = 1;
+
+        canvas.addEventListener('touchstart', function(e) {
+            if (e.touches.length === 2) {
+                e.preventDefault();
+                lastPinchDist = Math.hypot(
+                    e.touches[0].clientX - e.touches[1].clientX,
+                    e.touches[0].clientY - e.touches[1].clientY
+                );
+                pinchStartScale = scale;
+            } else if (e.touches.length === 1) {
+                dragging = true;
+                dragStartX = e.touches[0].clientX;
+                dragStartY = e.touches[0].clientY;
+                dragStartPanX = panX;
+                dragStartPanY = panY;
+            }
+        }, { passive: false });
+
+        canvas.addEventListener('touchmove', function(e) {
+            if (e.touches.length === 2) {
+                e.preventDefault();
+                const dist = Math.hypot(
+                    e.touches[0].clientX - e.touches[1].clientX,
+                    e.touches[0].clientY - e.touches[1].clientY
+                );
+                scale = Math.min(baseScale * MAX_SCALE, Math.max(baseScale * 0.5, pinchStartScale * (dist / lastPinchDist)));
+                if (scale <= baseScale * 1.01) { scale = baseScale; panX = 0; panY = 0; }
+                applyTransform();
+            } else if (e.touches.length === 1 && dragging) {
+                e.preventDefault();
+                panX = dragStartPanX + (e.touches[0].clientX - dragStartX);
+                panY = dragStartPanY + (e.touches[0].clientY - dragStartY);
+                applyTransform();
+            }
+        }, { passive: false });
+
+        canvas.addEventListener('touchend', function() { dragging = false; });
+
+        window.addEventListener('resize', function() {
+            if (lightbox.classList.contains('active')) {
+                const cw = canvas.clientWidth;
+                const ch = canvas.clientHeight;
+                const iw = img.naturalWidth;
+                const ih = img.naturalHeight;
+                if (iw && ih && cw && ch) {
+                    baseScale = Math.min(cw / iw, ch / ih);
+                    if (scale <= baseScale * 1.01) {
+                        scale = baseScale; panX = 0; panY = 0;
+                    }
+                    applyTransform();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
